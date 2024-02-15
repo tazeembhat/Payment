@@ -1,8 +1,8 @@
 # Payments App for sending money to other users
 
-## TECH STACK
+## Tech Stack
 - Nodejs
-- Reactjs
-- TailwindCss
+- React
+- TailwindCSS
 - Express
 - MongoDB
