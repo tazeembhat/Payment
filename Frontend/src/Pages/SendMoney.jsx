@@ -1,6 +1,7 @@
 import { useSearchParams } from "react-router-dom";
 import axios from "axios";
 import { useState } from "react";
+import {useNavigate} from "react-router-dom"
 
 export function SendMoney(){
     const [searchParams] = useSearchParams();
@@ -8,6 +9,7 @@ export function SendMoney(){
     const name = searchParams.get("fname");
     const lname = searchParams.get("lname");
     const [amount, setAmount] = useState(0);
+    const navigate = useNavigate();
 
     return <div className="flex justify-center h-screen bg-gray-200">
         <div className="flex flex-col h-full justify-center">
@@ -26,7 +28,7 @@ export function SendMoney(){
                     <div className="space-y-4">
                         <div className="space-y-4">
                             <label className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed 
-                            peer-disabled:opacity-70" for="amount">Amount(in ₹) </label>
+                            peer-disabled:opacity-70" htmlFor="amount">Amount(in ₹) </label>
                             <input onChange={(e)=>{
                                 setAmount(e.target.value);
                             }} type="number"
@@ -41,7 +43,13 @@ export function SendMoney(){
                                 headers: {
                                     Authorization: "Bearer " + localStorage.getItem("token") 
                                 }
+                            }).catch((error)=>{
+                                if(error.respose){
+                                    navigate(`/messagefailure?msg=${error.response.data.message}&goto=/dashboard`)
+                                }
+                                return;
                             });
+                            navigate(`/messagesuccess?msg="Transaction Successful"`)
                         }} className="justify-center rounded-md text-xl font-medium ring-offset-backgroud transition-colors h-10
                         px-4 py-2 w-full bg-green-700 text-white hover:bg-green-900">
                             Initiate Transfer

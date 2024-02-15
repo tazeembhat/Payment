@@ -3,6 +3,7 @@ import { Signup } from './Pages/Signup'
 import { Signin } from './Pages/Signin'
 import { Dashboard } from './Pages/Dashboard'
 import { SendMoney } from './Pages/SendMoney'
+import { MessageFailure, MessageSuccess } from './Pages/Message'
 
 function App() {
   return (
@@ -12,6 +13,8 @@ function App() {
         <Route path="/" element={<Signin />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/send" element={<SendMoney />} />
+        <Route path="/messagesuccess" element={<MessageSuccess />} />
+        <Route path="/messagefailure" element={<MessageFailure />} />
       </Routes>      
     </BrowserRouter>
   )

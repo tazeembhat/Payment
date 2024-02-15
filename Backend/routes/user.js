@@ -25,6 +25,7 @@ router.post("/signup", async (req, res)=>{
         res.status(400).json({
             message:"User already exists"
         })
+        return;
     }
 
     const user = await User.create({
@@ -34,17 +35,15 @@ router.post("/signup", async (req, res)=>{
         lastName: payload.lastname,
     });
 
-    const UserId = user["_id"];
+    const userId = user["_id"];
     await Account.create({
-        userId: UserId,
+        userId: userId,
         balance: 1 + Math.floor(Math.random() * 10000)
     })
     
     const token = jwt.sign({
-        UserId
+        userId
     }, JWT_SECRET);
-
-    req.headers.authorization = `Bearer ${token}`;
 
     res.status(200).json({
         message: "User created Successfully",
@@ -61,12 +60,20 @@ router.post("/signin", async (req, res)=>{
         res.status(411).json({
             message: "Invalid Input"
         })
+        return
     }
 
     const user = await User.findOne({
         username: payload.username,
         password: payload.password
     })
+
+    if(user === null){
+        res.status(404).json({
+            message: "User not found"
+        });
+        return;
+    }
 
     if(user["_id"]){
         const token = jwt.sign({

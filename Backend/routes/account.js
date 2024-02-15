@@ -18,6 +18,7 @@ router.get("/balance", authMiddleware, async (req, res)=>{
         res.status(400).json({
             msg: "Error occured while fetching the balance"
         })
+        return;
     }
 });
 

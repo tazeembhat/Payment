@@ -38,12 +38,23 @@ export function Signup(){
                             lastname,
                             username,
                             password
+                        }).catch((error)=>{
+                            if(error.response){
+                                navigate(`/messagefailure?msg=${error.response.data.message}&goto=/`)
+                            }
                         });
-                        localStorage.setItem("token", response.data.token);
-                        navigate(`/dashboard?name=${firstname}`);
+                        {
+                            if(response){
+                                localStorage.setItem("token", response.data.token);
+                                localStorage.setItem("name", firstname);
+                                const msg = "Account Created Successfully";
+                                navigate(`/messagesuccess?msg=${msg}`);
+                            }
+                        }
+
                     }} />
                 </div>
-                <BottomWarning label={"Already have an account?"} buttonText={"Sign in"} to={"/signin"}/>
+                <BottomWarning label={"Already have an account?"} buttonText={"Sign in"} to={"/"}/>
             </div>
         </div>
     </div>

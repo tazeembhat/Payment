@@ -5,7 +5,9 @@ const authMiddleware = (req, res, next)=>{
     const authHeader = req.headers.authorization;
 
     if(!authHeader || !authHeader.startsWith('Bearer ')){
-        res.status(403).json({});
+        res.status(403).json({
+            message: "Invalid token"
+        });
     }
 
     const token = authHeader.split(' ')[1];
@@ -17,10 +19,14 @@ const authMiddleware = (req, res, next)=>{
             next();
         }
         else{
-            return res.status(403).json({});
+            return res.status(403).json({
+                message: "Invalid ID"
+            });
         }
     }catch(err){
-        return res.status(403).json({});
+        return res.status(403).json({
+            message: "Error while decoding"
+        });
     }
 };
 

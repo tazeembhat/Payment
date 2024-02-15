@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { Button } from "./Button"
 import axios from "axios";
 import {useNavigate} from "react-router-dom"
+import {jwtDecode} from "jwt-decode";
 
 export function Users(){
     const [users, setUsers] = useState([]);
@@ -24,7 +25,7 @@ export function Users(){
             }} className="w-full border rounded border-slate-400 px-2 py-1" type="text" placeholder="Search Users..." />
         </div>
         <div>
-            {users.map(user => <User user={user}/>)}
+            {users.map(user => <User key={user._id} user={user}/>)}
         </div>
     </div>
 }
@@ -35,7 +36,7 @@ function User({user}){
         <div className="flex gap-3 justify-center">
             <div className="flex rounded-full bg-slate-200 h-11 w-11 justify-center">
                 <div className="flex flex-col text-xl h-full justify-center font-medium">
-                    {user.firstName[0]}
+                    {user.firstName[0].toUpperCase()}
                 </div>   
             </div>
             <div className="flex flex-col justify-center h-full text-lg font-normal">

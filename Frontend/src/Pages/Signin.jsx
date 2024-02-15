@@ -19,7 +19,7 @@ export function Signin(){
                 <SubHeading label={"Enter your credentials to access your account"} />
                 <InputBox onChange={(e) => {
                     setUsername(e.target.value);
-                }} label={"Email"} placeholder={"tazeem@example.com"}/>
+                }} label={"Email"} placeholder={"user@example.com"}/>
                 <InputBox onChange={(e) => {
                     setPassword(e.target.value);
                 }} label={"Password"} placeholder={""}/>
@@ -28,9 +28,17 @@ export function Signin(){
                         const response = await axios.post("http://localhost:3000/api/v1/user/signin", {
                             username,
                             password
+                        }).catch((error)=>{
+                            if(error.response){
+                                navigate(`/messagefailure?msg=${error.response.data.message}&goto=/`)
+                            }
                         });
-                        localStorage.setItem("token", response.data.token);
-                        navigate(`/dashboard?name=${response.data.firstName}`)
+
+                        {if(response){
+                            localStorage.setItem("token", response.data.token);
+                            localStorage.setItem("name", response.data.firstName);
+                            navigate("/dashboard")
+                        }}
                     }} />
                 </div>
                 <BottomWarning label={"Don't have an account?"} buttonText={"Sign up"} to={"/signup"} />
