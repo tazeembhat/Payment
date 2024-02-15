@@ -1,7 +1,8 @@
 const express = require("express");
 const { newUser, existingUser, updateUser } = require("../types");
 const jwt = require("jsonwebtoken");
-const {JWT_SECRET} = require("../config");
+require("dotenv").config();
+const JWT_SECRET = process.env.JWT_SECRET;
 const {User, Account} = require("../db");
 const { authMiddleware } = require("../middlewares/authMiddleware");
 const router = express.Router();
