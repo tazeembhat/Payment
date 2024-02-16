@@ -139,5 +139,20 @@ router.get("/bulk", async (req, res)=>{
     })
 })
 
+router.delete("/delete", authMiddleware, async (req, res)=>{
+    const userId = req.userId;
+    
+    await User.deleteOne({
+        "_id": userId
+    })
+
+    await Account.deleteOne({
+        "userId": userId
+    })
+
+    res.status(200).json({
+        message: "User and related Account deleted successfully"
+    })
+})
 
 module.exports = router;
