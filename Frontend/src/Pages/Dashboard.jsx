@@ -4,10 +4,8 @@ import { Users } from "../Components/Users";
 import { useSearchParams } from "react-router-dom"
 
 export function Dashboard(){
-    const name = localStorage.getItem("name");
-
     return <div>
-        <Topbar name={name}/>
+        <Topbar />
         <Balance />
         <Users />
     </div>

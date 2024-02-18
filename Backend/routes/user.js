@@ -96,7 +96,7 @@ router.post("/signin", async (req, res)=>{
 
 router.put("/user", authMiddleware, async (req, res)=>{
     const payload = req.body;
-    const {success} = updateUser.safeParse(payload);
+    const { success } = updateUser.safeParse(payload);
 
     if(!success){
         res.status(411).json({
@@ -137,6 +137,18 @@ router.get("/bulk", async (req, res)=>{
             _id: u._id
         }))
     })
+})
+
+router.get("/getuser", authMiddleware, async(req, res)=>{
+    const userId = req.userId;
+    
+    const userDetails = await User.findOne({
+        _id: userId
+    })
+
+    res.status(200).json(
+        userDetails
+    )
 })
 
 router.delete("/delete", authMiddleware, async (req, res)=>{

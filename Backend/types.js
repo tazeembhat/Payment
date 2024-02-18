@@ -13,9 +13,10 @@ const existingUser = z.object({
 })
 
 const updateUser = z.object({
-    password: z.string().optional(),
+    username: z.string().optional(),
     firstName: z.string().optional(),
-    lastName: z.string().optional()
+    lastName: z.string().optional(),
+    password: z.string().optional()
 })
 
 module.exports = {

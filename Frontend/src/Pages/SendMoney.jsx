@@ -2,6 +2,7 @@ import { useSearchParams } from "react-router-dom";
 import axios from "axios";
 import { useState } from "react";
 import {useNavigate} from "react-router-dom"
+import { Button } from "../Components/Button";
 
 export function SendMoney(){
     const [searchParams] = useSearchParams();
@@ -51,9 +52,14 @@ export function SendMoney(){
                             });
                             navigate(`/messagesuccess?msg="Transaction Successful"`)
                         }} className="justify-center rounded-md text-xl font-medium ring-offset-backgroud transition-colors h-10
-                        px-4 py-2 w-full bg-green-700 text-white hover:bg-green-900">
+                        px-3 py-1 w-full bg-green-700 text-white hover:bg-green-900">
                             Initiate Transfer
                         </button>
+                        <div>
+                            <Button label={"Cancel"} onClick={()=>{
+                                navigate("/dashboard");
+                            }} />
+                        </div>
                     </div>
                 </div>
             </div>

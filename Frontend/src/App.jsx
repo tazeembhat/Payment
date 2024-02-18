@@ -4,6 +4,7 @@ import { Signin } from './Pages/Signin'
 import { Dashboard } from './Pages/Dashboard'
 import { SendMoney } from './Pages/SendMoney'
 import { MessageFailure, MessageSuccess } from './Pages/Message'
+import { UpdateUser } from './Pages/Update'
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path="/send" element={<SendMoney />} />
         <Route path="/messagesuccess" element={<MessageSuccess />} />
         <Route path="/messagefailure" element={<MessageFailure />} />
+        <Route path="/updateuser" element={<UpdateUser />} />
       </Routes>      
     </BrowserRouter>
   )
